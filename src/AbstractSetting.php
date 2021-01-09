@@ -151,4 +151,12 @@ abstract class AbstractSetting
 			$PDO->inject("DELETE FROM $table WHERE $n = ?")->send([$key]);
 		}
 	}
+
+	/**
+	 * @return array
+	 */
+	public function getSettings(): array
+	{
+		return $this->settings;
+	}
 }
