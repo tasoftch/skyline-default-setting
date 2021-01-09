@@ -44,6 +44,8 @@ abstract class AbstractSetting
 	const RECORD_CONTENT_KEY = 'content';
 	const RECORD_MULTIPLE_KEY = 'multiple';
 
+	const PDO_SERVICE_KEY = 'PDO';
+
 	/** @var array */
 	private $settings;
 	protected static $setting;
@@ -52,7 +54,7 @@ abstract class AbstractSetting
 
 	protected function __construct() {
 		/** @var PDO $PDO */
-		$PDO = ServiceManager::generalServiceManager()->get("PDO");
+		$PDO = ServiceManager::generalServiceManager()->get(static::PDO_SERVICE_KEY);
 
 		$table = $this->getTableName();
 		$n = static::RECORD_NAME_KEY;
