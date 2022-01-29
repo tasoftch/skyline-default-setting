@@ -57,21 +57,41 @@ abstract class AbstractSetting
 		$PDO = ServiceManager::generalServiceManager()->get(static::PDO_SERVICE_KEY);
 
 		$table = $this->getTableName();
+		$this->importSettingsFromTable($table, $PDO);
+	}
+
+	/**
+	 * Internal import setting method
+	 *
+	 * @param string $table
+	 * @param PDO $PDO
+	 */
+	protected function importSettingsFromTable(string $table, PDO $PDO) {
 		$n = static::RECORD_NAME_KEY;
 		$c = static::RECORD_CONTENT_KEY;
 		$m = static::RECORD_MULTIPLE_KEY;
 
 		foreach($PDO->select("SELECT DISTINCT $n, $c, $m FROM $table") as $record) {
 			if($k = $record[ $n ] ?? NULL) {
-				$m = $record[ $m ] ?? 0;
 				$cnt = $record[ $c ] ?? NULL;
 
-				if($m)
+				if($this->isMultipleRecord($record))
 					$this->settings[$k][] = $cnt;
 				else
 					$this->settings[$k] = $cnt;
 			}
 		}
+	}
+
+	/**
+	 * Declares a record as multiple values setting or not.
+	 *
+	 * @param $record
+	 * @return bool
+	 */
+	protected function isMultipleRecord($record): bool
+	{
+		return ( $record[static::RECORD_MULTIPLE_KEY] ) ? true : false;
 	}
 
 	/**
