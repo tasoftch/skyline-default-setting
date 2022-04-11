@@ -28,7 +28,7 @@ $setup = DefaultSetting::getDefaultSetting();
 echo $setup->getSetting('my-setting', /* default value */ 'not-available');
 
 // Defining a setting, see below
-$setup->setSetting('my-setting', /* value */ 13, /* temporary */ false, /* multiple */ false);
+$setup->setSetting('my-setting', /* value */ 13, /* multiple */ false, /* temporary */ false);
 // Passing true to temporary will only update the value for the current request, while passing false writes the passed value into the database persistently.
 
 // Removes the setting
@@ -39,9 +39,9 @@ $setup->removeSetting('my-setting', /* temporary */ false);
 See below how you can use a custom setting tool:
 ```php
 <?php
-use Skyline\Setup\AbstractSetting;
+use Skyline\Setup\DefaultSetting;
 
-class MySetting extends AbstractSetting {
+class MySetting extends DefaultSetting {
     // Adjust the sql table field names
     const RECORD_ID_KEY = 'customized_id';
     const RECORD_NAME_KEY = 'customized_name';

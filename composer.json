@@ -14,10 +14,7 @@
   },
   "require" : {
     "php": ">=7.2",
-    "tasoft/php-pdo": "^0.8",
-    "tasoft/service-manager": "^2.3"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^6"
+    "tasoft/service-manager": "^2.3",
+    "tasoft/setting": "^0.8"
   }
 }

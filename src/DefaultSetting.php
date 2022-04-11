@@ -35,8 +35,20 @@
 namespace Skyline\Setup;
 
 
+use TASoft\Service\ServiceManager;
+use TASoft\Setting\AbstractSetting;
+use TASoft\Util\PDO;
+
 class DefaultSetting extends AbstractSetting
 {
+	const PDO_SERVICE_KEY = 'PDO';
+
+	protected function getPDO(): PDO
+	{
+		return ServiceManager::generalServiceManager()->get(static::PDO_SERVICE_KEY);
+	}
+
+
 	protected function getTableName(): string
 	{
 		return "SKY_SETTING";
